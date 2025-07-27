@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeLoom Salon | Premium Beauty Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --primary: #d4af7a;
+            --secondary: #8b5a2b;
+            --dark: #1a120b;
+            --light: #f9f5f0;
+            --accent: #c69c6d;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            --gold: #d4af7a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        /* Particle background container */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Glassmorphism effect */
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+        }
+        
+        /* Navigation */
+        .navbar {
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(26, 18, 11, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            padding: 15px 5%;
+        }
+        
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            color: var(--light);
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 10;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+        
+        .navbar-brand span {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .navbar-brand span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 3px;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .nav-link:hover {
+            background: rgba(212, 175, 122, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .nav-link:hover::before {
+            width: 80%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            padding: 14px 32px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(139, 90, 43, 0.3);
+            color: var(--light);
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(139, 90, 43, 0.5);
+        }
+        
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Hero Section - Reduced size */
+        .hero {
+            height: 85vh; /* Reduced from 100vh */
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+            color: var(--light);
+        }
+        
+        .hero-content {
+            max-width: 550px; /* Reduced from 650px */
+            padding: 30px; /* Reduced from 40px */
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.8rem; /* Reduced from 4.5rem */
+            margin-bottom: 15px; /* Reduced from 20px */
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+        
+        .hero p {
+            font-size: 1.1rem; /* Reduced from 1.2rem */
+            margin-bottom: 30px; /* Reduced from 40px */
+            max-width: 500px; /* Reduced from 600px */
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1.2s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1.2s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%; /* Reduced from 45% */
+            max-width: 550px; /* Reduced from 600px */
+            height: 60vh; /* Reduced from 70vh */
+            border-radius: 30px;
+            overflow: hidden;
+            perspective: 1000px;
+            animation: float 8s ease-in-out infinite;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(212, 175, 122, 0.5);
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .hero-image:hover img {
+            transform: scale(1.05) rotate(1deg);
+        }
+        
+        /* Section styling */
+        section {
+            padding: 100px 5%; /* Reduced padding */
+            position: relative;
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px; /* Reduced from 80px */
+            position: relative;
+            color: var(--light);
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem; /* Reduced from 3rem */
+            margin-bottom: 15px; /* Reduced from 20px */
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 25px auto 0; /* Reduced top margin */
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Gold text for Technology and Salon Features */
+        #tech .section-title h2 {
+            color: var(--gold); /* Changed to gold color */
+        }
+        
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: linear-gradient(145deg, rgba(26, 18, 11, 0.7), rgba(42, 31, 19, 0.9));
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            height: 100%;
+            color: var(--light);
+            border: 1px solid rgba(212, 175, 122, 0.3);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px) rotateY(5deg) scale(1.03);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 122, 0.6);
+        }
+        
+        .service-image {
+            height: 220px; /* Reduced from 250px */
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1) rotate(1deg);
+        }
+        
+        .service-content {
+            padding: 25px; /* Reduced from 30px */
+            position: relative;
+            z-index: 2;
+        }
+        
+        .service-icon {
+            width: 70px; /* Reduced from 80px */
+            height: 70px; /* Reduced from 80px */
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem; /* Reduced from 2rem */
+            color: white;
+            margin: -55px auto 15px; /* Reduced margins */
+            position: relative;
+            z-index: 3;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 30px rgba(139, 90, 43, 0.4);
+        }
+        
+        .service-content h3 {
+            font-size: 1.6rem; /* Reduced from 1.8rem */
+            margin-bottom: 12px; /* Reduced from 15px */
+            text-align: center;
+        }
+        
+        .service-content p {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 18px; /* Reduced from 20px */
+            font-size: 0.95rem; /* Reduced font size */
+        }
+        
+        .price {
+            text-align: center;
+            font-size: 1.4rem; /* Reduced from 1.5rem */
+            color: var(--primary);
+            font-weight: bold;
+            margin: 12px 0; /* Reduced from 15px */
+        }
+        
+        /* Team section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            height: 350px; /* Reduced from 380px */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+        }
+        
+        .team-image {
+            height: 100%;
+            position: relative;
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .team-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: white;
+            padding: 25px; /* Reduced from 30px */
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .team-card:hover .team-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .team-card:hover .team-image img {
+            transform: scale(1.1);
+        }
+        
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            height: 280px; /* Reduced from 300px */
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(212, 175, 122, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+        
+        /* Technology section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px; /* Reduced from 60px */
+        }
+        
+        .tech-card {
+            background: linear-gradient(145deg, rgba(26, 18, 11, 0.7), rgba(42, 31, 19, 0.9));
+            border-radius: 20px;
+            padding: 35px; /* Reduced from 40px */
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(212, 175, 122, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary);
+        }
+        
+        .tech-icon {
+            font-size: 3rem; /* Reduced from 3.5rem */
+            color: var(--primary);
+            margin-bottom: 18px; /* Reduced from 20px */
+        }
+        
+        /* Salon features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; /* Reduced from 30px */
+            margin-top: 50px; /* Reduced from 60px */
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, rgba(26, 18, 11, 0.7), rgba(42, 31, 19, 0.9));
+            border-radius: 20px;
+            padding: 25px; /* Reduced from 30px */
+            text-align: center;
+            border: 1px solid rgba(212, 175, 122, 0.3);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            font-size: 2.2rem; /* Reduced from 2.5rem */
+            color: var(--primary);
+            margin-bottom: 18px; /* Reduced from 20px */
+        }
+        
+        /* Booking section */
+        .booking-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px; /* Reduced from 40px */
+        }
+        
+        .booking-info {
+            background: linear-gradient(145deg, rgba(26, 18, 11, 0.7), rgba(42, 31, 19, 0.9));
+            border-radius: 20px;
+            padding: 35px; /* Reduced from 40px */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            height: 100%;
+            color: var(--light);
+            border: 1px solid rgba(212, 175, 122, 0.3);
+        }
+        
+        .booking-form {
+            background: linear-gradient(145deg, rgba(26, 18, 11, 0.7), rgba(42, 31, 19, 0.9));
+            border-radius: 20px;
+            padding: 35px; /* Reduced from 40px */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(212, 175, 122, 0.3);
+        }
+        
+        /* Form elements */
+        .form-group {
+            margin-bottom: 20px; /* Reduced from 25px */
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 18px; /* Reduced padding */
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(212, 175, 122, 0.3);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        
+        /* Custom dropdown arrow */
+        .form-group::after {
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            pointer-events: none;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 2px rgba(212, 175, 122, 0.3);
+        }
+        
+        /* Updated dropdown styles */
+        select.form-control {
+            background: linear-gradient(135deg, rgba(26, 18, 11, 0.8), rgba(42, 31, 19, 0.9));
+            border: 1px solid var(--gold);
+            color: var(--light);
+            padding-right: 40px; /* Space for custom arrow */
+        }
+        
+        select.form-control option {
+            background: rgba(26, 18, 11, 0.95);
+            color: var(--light);
+            padding: 12px 15px;
+        }
+        
+        select.form-control option:hover {
+            background: var(--gold) !important;
+            color: var(--dark) !important;
+        }
+        
+        select.form-control:focus {
+            background: linear-gradient(135deg, rgba(26, 18, 11, 0.9), rgba(42, 31, 19, 0.95));
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 122, 0.5);
+        }
+        
+        textarea.form-control {
+            min-height: 140px; /* Reduced from 150px */
+            resize: vertical;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(10, 7, 4, 0.95);
+            color: var(--light);
+            padding: 70px 5% 25px; /* Reduced padding */
+            border-top: 1px solid rgba(212, 175, 122, 0.2);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px; /* Reduced from 40px */
+            margin-bottom: 50px; /* Reduced from 60px */
+        }
+        
+        .footer-title {
+            position: relative;
+            margin-bottom: 20px; /* Reduced from 25px */
+            padding-bottom: 12px; /* Reduced from 15px */
+            color: var(--light);
+            font-size: 1.4rem; /* Reduced from 1.5rem */
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 18px; /* Reduced from 20px */
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; /* Reduced from 50px */
+            height: 45px; /* Reduced from 50px */
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1.1rem; /* Reduced from 1.2rem */
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Reduced from 12px */
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .footer-links a i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 25px; /* Reduced from 30px */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: rotate(0deg);
+            }
+            10% {
+                transform: rotate(14deg);
+            }
+            20% {
+                transform: rotate(-8deg);
+            }
+            30% {
+                transform: rotate(14deg);
+            }
+            40% {
+                transform: rotate(-4deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+            60% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Wave divider */
+        .wave-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+        
+        .wave-divider .shape-fill {
+            fill: rgba(249, 245, 240, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero {
+                text-align: center;
+                padding-top: 80px; /* Reduced from 100px */
+                height: auto;
+                padding-bottom: 80px;
+            }
+            
+            .hero-image {
+                position: relative;
+                width: 100%;
+                max-width: 450px; /* Reduced from 500px */
+                height: 350px; /* Reduced from 400px */
+                margin: 30px auto 0; /* Reduced margin */
+                right: auto;
+                top: auto;
+                transform: none;
+            }
+            
+            .hero-content {
+                margin: 0 auto;
+            }
+            
+            .hero h1 {
+                font-size: 3rem; /* Reduced from 3.5rem */
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem; /* Reduced from 2.8rem */
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem; /* Reduced from 2.5rem */
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background Container -->
+    <div id="particles-js"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a class="navbar-brand" href="#home">Luxe<span>Loom</span></a>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#tech" class="nav-link">Technology</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#booking" class="btn btn-primary"><span>Book Now</span></a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content glass">
+            <h1>Redefining Beauty Excellence</h1>
+            <p>LuxeLoom Salon combines luxury, innovation, and expertise to deliver unparalleled beauty experiences in a sophisticated environment.</p>
+            <div class="hero-buttons">
+                <a href="#booking" class="btn btn-primary"><span>Book Appointment</span></a>
+                <a href="#virtual-tour" class="btn btn-primary" style="background: transparent; border: 2px solid var(--primary);"><span>Virtual Tour</span></a>
+            </div>
+        </div>
+        <div class="hero-image glass">
+            <img src="LuxeLoom Salon.jpg" alt="Luxury Salon">
+        </div>
+        
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-title">
+            <h2>Our Vision</h2>
+            <p>Pioneering the future of beauty experiences</p>
+        </div>
+        
+        <div class="container">
+            <div class="glass" style="padding: 50px; max-width: 1100px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 35px; align-items: center;">
+                    <div>
+                        <h3 style="margin-bottom: 20px; color: var(--primary); font-size: 1.8rem;">The LuxeLoom Experience</h3>
+                        <p style="margin-bottom: 15px; color: rgba(255, 255, 255, 0.9);">Founded in 2010, LuxeLoom has transformed from a traditional salon into a technological beauty hub. Our 10,000 sq. ft. space houses 15 styling stations, 8 private treatment rooms, a nail art bar, and a relaxation lounge.</p>
+                        <p style="margin-bottom: 25px; color: rgba(255, 255, 255, 0.9);">Our team of 35 specialists includes master stylists, color technicians, estheticians, nail artists, and makeup professionals, all trained in the latest techniques and technologies.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="glass animate-on-scroll" style="padding: 15px; border-radius: 15px; text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">13+</div>
+                                <div>Years of Excellence</div>
+                            </div>
+                            <div class="glass animate-on-scroll" style="padding: 15px; border-radius: 15px; text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">35</div>
+                                <div>Beauty Experts</div>
+                            </div>
+                            <div class="glass animate-on-scroll" style="padding: 15px; border-radius: 15px; text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">10k+</div>
+                                <div>Sq Ft Space</div>
+                            </div>
+                            <div class="glass animate-on-scroll" style="padding: 15px; border-radius: 15px; text-align: center;">
+                                <div style="font-size: 2rem; color: var(--primary); font-weight: bold;">98%</div>
+                                <div>Client Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="glass animate-on-scroll" style="height: 180px; border-radius: 15px; overflow: hidden;">
+                                <img src="Salon Interior.jpg" alt="Salon Interior" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="glass animate-on-scroll" style="height: 180px; border-radius: 15px; overflow: hidden; margin-top: 30px;">
+                                <img src="salon services.jpg" alt="Salon Service" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="glass animate-on-scroll" style="height: 180px; border-radius: 15px; overflow: hidden;">
+                                <img src="Nail Art.jpg" alt="Nail Art" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="glass animate-on-scroll" style="height: 180px; border-radius: 15px; overflow: hidden; margin-top: -30px;">
+                                <img src="Facial.jpg" alt="Facial" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services">
+        <div class="section-title">
+            <h2>Premium Services</h2>
+            <p>Comprehensive beauty solutions for every need</p>
+        </div>
+        
+        <div class="services-grid">
+            <!-- Hair Services -->
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="Hair Design.jpg" alt="Hair Services">
+                </div>
+                <div class="service-icon">
+                    <i class="fas fa-cut"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Hair Design</h3>
+                    <p>Precision cuts, coloring, extensions, and treatments using premium products and advanced techniques.</p>
+                    <div class="price">From $85</div>
+                    <div style="text-align: center;">
+                        <a href="#booking" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skin Services -->
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="Skin Treatments.jpg" alt="Skin Services">
+                </div>
+                <div class="service-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Skin Treatments</h3>
+                    <p>Facials, peels, microdermabrasion, and advanced anti-aging solutions tailored to your skin type.</p>
+                    <div class="price">From $120</div>
+                    <div style="text-align: center;">
+                        <a href="#booking" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nail Services -->
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="Nail Artistry.jpg" alt="Nail Services">
+                </div>
+                <div class="service-icon">
+                    <i class="fas fa-hand-sparkles"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Nail Artistry</h3>
+                    <p>Manicures, pedicures, extensions, and intricate nail art designs using non-toxic products.</p>
+                    <div class="price">From $45</div>
+                    <div style="text-align: center;">
+                        <a href="#booking" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Makeup Services -->
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="Makeup Services.jpg" alt="Makeup Services">
+                </div>
+                <div class="service-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Makeup Services</h3>
+                    <p>From natural day looks to glamorous evening styles, our makeup artists enhance your features.</p>
+                    <div class="price">From $75</div>
+                    <div style="text-align: center;">
+                        <a href="#booking" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bridal Packages -->
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="Bridal Packages.jpg" alt="Bridal Packages">
+                </div>
+                <div class="service-icon">
+                    <i class="fas fa-ring"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Bridal Packages</h3>
+                    <p>Comprehensive bridal packages to ensure you look and feel extraordinary on your special day.</p>
+                    <div class="price">From $350</div>
+                    <div style="text-align: center;">
+                        <a href="#booking" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <!-- New Premium Service 2: Eyelash Extensions -->
+            <div class="service-card animate-on-scroll">
+                <div class="service-image">
+                    <img src="Eyelash Extensions.jpg" alt="Eyelash Extensions">
+                </div>
+                <div class="service-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Eyelash Extensions</h3>
+                    <p>Luxurious eyelash extensions for a dramatic, natural-looking enhancement to your eyes.</p>
+                    <div class="price">From $110</div>
+                    <div style="text-align: center;">
+                        <a href="#booking" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technology Section -->
+    <section id="tech">
+        <div class="section-title">
+            <h2>Advanced Technology</h2>
+            <p>Innovative solutions for superior results</p>
+        </div>
+        
+        <div class="tech-grid">
+            <div class="tech-card animate-on-scroll">
+                <div class="tech-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI Style Advisor</h3>
+                <p>Our proprietary AI analyzes your features, skin tone, and preferences to recommend personalized styles.</p>
+            </div>
+            
+            <div class="tech-card animate-on-scroll">
+                <div class="tech-icon">
+                    <i class="fas fa-vr-cardboard"></i>
+                </div>
+                <h3>Virtual Try-On</h3>
+                <p>Experience our AR technology to preview hairstyles and colors before your appointment.</p>
+            </div>
+            
+            <div class="tech-card animate-on-scroll">
+                <div class="tech-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3>Smart Salon System</h3>
+                <p>IoT-connected stations monitor service quality and client comfort in real-time.</p>
+            </div>
+        </div>
+        
+        <div class="section-title" style="margin-top: 100px;">
+            <h2>Salon Features</h2>
+            <p>Exceptional amenities for your comfort</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>High-Speed Wi-Fi</h3>
+                <p>Stay connected with our enterprise-grade wireless network throughout the salon.</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i class="fas fa-tablet-alt"></i>
+                </div>
+                <h3>Digital Concierge</h3>
+                <p>Tablets at every station for entertainment, service customization, and technician feedback.</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i class="fas fa-wine-glass-alt"></i>
+                </div>
+                <h3>Premium Lounge</h3>
+                <p>Relax in our champagne bar with artisanal snacks while waiting for your appointment.</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <h3>Child Care</h3>
+                <p>Professional childcare services so you can enjoy your experience worry-free.</p>
+            </div>
+            
+            <!-- New Salon Feature 1: Private VIP Suites -->
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>Private VIP Suites</h3>
+                <p>Exclusive suites for clients seeking ultimate privacy and personalized attention.</p>
+            </div>
+            
+            <!-- New Salon Feature 2: Refreshment Bar -->
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i class="fas fa-cocktail"></i>
+                </div>
+                <h3>Refreshment Bar</h3>
+                <p>Premium beverages and healthy snacks curated by a professional mixologist.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Section -->
+    <section id="team">
+        <div class="section-title">
+            <h2>Our Experts</h2>
+            <p>Meet our team of beauty professionals</p>
+        </div>
+        
+        <div class="team-grid">
+            <!-- Team Member 1 -->
+            <div class="team-card animate-on-scroll">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sophie Evans">
+                </div>
+                <div class="team-overlay">
+                    <h3>Sophie Evans</h3>
+                    <p>Master Stylist</p>
+                    <p>10+ years experience in precision cutting and color correction.</p>
+                </div>
+            </div>
+            
+            <!-- Team Member 2 -->
+            <div class="team-card animate-on-scroll">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mia Johnson">
+                </div>
+                <div class="team-overlay">
+                    <h3>Mia Johnson</h3>
+                    <p>Nail Specialist</p>
+                    <p>Certified in advanced nail techniques and intricate nail art.</p>
+                </div>
+            </div>
+            
+            <!-- Team Member 3 -->
+            <div class="team-card animate-on-scroll">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Emma Wilson">
+                </div>
+                <div class="team-overlay">
+                    <h3>Emma Wilson</h3>
+                    <p>Skincare Expert</p>
+                    <p>Specializes in advanced facial treatments and skin rejuvenation.</p>
+                </div>
+            </div>
+            
+            <!-- Team Member 4 -->
+            <div class="team-card animate-on-scroll">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Olivia Parker">
+                </div>
+                <div class="team-overlay">
+                    <h3>Olivia Parker</h3>
+                    <p>Makeup Artist</p>
+                    <p>Professional makeup artist with expertise in bridal and editorial looks.</p>
+                </div>
+            </div>
+            
+            <!-- Team Member 5 -->
+            <div class="team-card animate-on-scroll">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Alex Morgan">
+                </div>
+                <div class="team-overlay">
+                    <h3>Alex Morgan</h3>
+                    <p>Bridal Specialist</p>
+                    <p>10+ years creating stunning bridal looks for special occasions.</p>
+                </div>
+            </div>
+            
+            <!-- New Team Member 6: James Rodriguez -->
+            <div class="team-card animate-on-scroll">
+                <div class="team-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="James Rodriguez">
+                </div>
+                <div class="team-overlay">
+                    <h3>James Rodriguez</h3>
+                    <p>Hair Spa Specialist</p>
+                    <p>Expert in therapeutic hair treatments and scalp rejuvenation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="section-title">
+            <h2>Our Gallery</h2>
+            <p>Showcasing our exceptional transformations</p>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item animate-on-scroll">
+                <img src="Nail Art in ss.jpg" alt="Nail Art">
+                <div class="gallery-overlay">
+                    <h3 class="text-white">Nail Art</h3>
+                </div>
+            </div>
+            
+            <div class="gallery-item animate-on-scroll">
+                <img src="Hair Coloring ss.jpg" alt="Hair Coloring">
+                <div class="gallery-overlay">
+                    <h3 class="text-white">Hair Coloring</h3>
+                </div>
+            </div>
+            
+            <div class="gallery-item animate-on-scroll">
+                <img src="Bridal Makeup ss.jpg" alt="Bridal Makeup">
+                <div class="gallery-overlay">
+                    <h3 class="text-white">Bridal Makeup</h3>
+                </div>
+            </div>
+            
+            <div class="gallery-item animate-on-scroll">
+                <img src="Hair Styling ss.jpg" alt="Hair Styling">
+                <div class="gallery-overlay">
+                    <h3 class="text-white">Hair Styling</h3>
+                </div>
+            </div>
+            
+            <!-- New Gallery Image 1 -->
+            <div class="gallery-item animate-on-scroll">
+                <img src="Eyelash Extensions ss.jpg" alt="Eyelash Extensions">
+                <div class="gallery-overlay">
+                    <h3 class="text-white">Eyelash Extensions</h3>
+                </div>
+            </div>
+            
+            <!-- New Gallery Image 2 -->
+            <div class="gallery-item animate-on-scroll">
+                <img src="Spa Treatment ss.jpg" alt="Spa Treatment">
+                <div class="gallery-overlay">
+                    <h3 class="text-white">Spa Treatment</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Booking Section -->
+    <section id="booking">
+        <div class="section-title">
+            <h2>Book Your Experience</h2>
+            <p>Reserve your appointment today</p>
+        </div>
+        
+        <div class="booking-container">
+            <div class="booking-info animate-on-scroll">
+                <h3 style="margin-bottom: 25px; color: var(--primary);">Salon Information</h3>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                    <div style="width: 45px; height: 45px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                        <i class="fas fa-map-marker-alt" style="color: white; font-size: 1.1rem;"></i>
+                    </div>
+                    <div>
+                        <h4>Location</h4>
+                        <p>Mosmyiat, Sindh, Pakistan</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                    <div style="width: 45px; height: 45px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                        <i class="fas fa-phone" style="color: white; font-size: 1.1rem;"></i>
+                    </div>
+                    <div>
+                        <h4>Contact</h4>
+                        <p>+92 348 8338312</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                    <div style="width: 45px; height: 45px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                        <i class="fas fa-envelope" style="color: white; font-size: 1.1rem;"></i>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>rajputdileepsingh150@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start;">
+                    <div style="width: 45px; height: 45px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">
+                        <i class="fas fa-clock" style="color: white; font-size: 1.1rem;"></i>
+                    </div>
+                    <div>
+                        <h4>Hours</h4>
+                        <p>Monday-Friday: 9am-9pm<br>Saturday: 9am-7pm<br>Sunday: 10am-5pm</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 35px;">
+                    <h4 style="margin-bottom: 15px; color: var(--primary);">Virtual Consultation</h4>
+                    <p>Schedule a virtual consultation with our experts to plan your transformation before visiting our salon.</p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 18px; display: inline-block;"><span>Book Consultation</span></a>
+                </div>
+            </div>
+            
+            <div class="booking-form animate-on-scroll">
+                <h3 style="margin-bottom: 25px; color: var(--primary);">Appointment Request</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="Phone Number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select class="form-control" required>
+                            <option value="" disabled selected>Select Service</option>
+                            <option>Haircut & Styling</option>
+                            <option>Hair Coloring</option>
+                            <option>Hair Treatments</option>
+                            <option>Facial Treatment</option>
+                            <option>Manicure</option>
+                            <option>Pedicure</option>
+                            <option>Makeup Application</option>
+                            <option>Waxing</option>
+                            <option>Bridal Package</option>
+                            
+                            <option>Eyelash Extensions</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select class="form-control" required>
+                            <option value="" disabled selected>Select Specialist</option>
+                            <option>Sophie Evans (Master Stylist)</option>
+                            <option>Mia Johnson (Nail Specialist)</option>
+                            <option>Emma Wilson (Skincare Expert)</option>
+                            <option>Olivia Parker (Makeup Artist)</option>
+                            <option>Alex Morgan (Bridal Specialist)</option>
+                            <option>James Rodriguez (Hair Spa)</option>
+                            <option>Any Available Specialist</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="date" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="time" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4" placeholder="Special Requests or Notes"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;"><span>Request Appointment</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h3 class="footer-title">LuxeLoom Salon</h3>
+                <p style="margin-bottom: 18px; color: rgba(255, 255, 255, 0.7);">Redefining beauty through innovation, expertise, and luxurious experiences.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="footer-title">Services</h3>
+                <div class="footer-links">
+                    <a href="#services"><i class="fas fa-cut"></i> Hair Design</a>
+                    <a href="#services"><i class="fas fa-spa"></i> Skin Treatments</a>
+                    <a href="#services"><i class="fas fa-hand-sparkles"></i> Nail Artistry</a>
+                    <a href="#services"><i class="fas fa-palette"></i> Makeup Services</a>
+                    <a href="#services"><i class="fas fa-ring"></i> Bridal Packages</a>
+                    
+                    <a href="#services"><i class="fas fa-eye"></i> Eyelash Extensions</a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="footer-title">Quick Links</h3>
+                <div class="footer-links">
+                    <a href="#home"><i class="fas fa-home"></i> Home</a>
+                    <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+                    <a href="#services"><i class="fas fa-concierge-bell"></i> Services</a>
+                    <a href="#team"><i class="fas fa-users"></i> Our Team</a>
+                    <a href="#booking"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="footer-title">Newsletter</h3>
+                <p style="margin-bottom: 18px; color: rgba(255, 255, 255, 0.7);">Subscribe for exclusive offers and beauty tips.</p>
+                <div style="display: flex;">
+                    <input type="email" placeholder="Your Email" style="flex: 1; padding: 12px 20px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(212, 175, 122, 0.3); border-radius: 50px 0 0 50px; color: white;">
+                    <button style="background: var(--primary); color: white; border: none; padding: 0 22px; border-radius: 0 50px 50px 0; cursor: pointer; font-size: 1.1rem;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 LuxeLoom Salon. All rights reserved. Luxury beauty experiences redefined.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#d4af7a" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.3, random: true },
+                    size: { value: 4, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#d4af7a",
+                        opacity: 0.1,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    }
+                }
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Animation on scroll
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.animate-on-scroll');
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    if (elementPosition < screenPosition) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Form submission
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your booking request! We will contact you shortly to confirm your appointment.');
+                    form.reset();
+                });
+            }
+            
+            // Service card hover effect enhancement
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleY = (x - centerX) / 25;
+                    const angleX = (centerY - y) / 25;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(20px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                    }, 500);
+                });
+            });
+            
+            // Logo click scroll to home
+            document.querySelector('.navbar-brand').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('#home').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
